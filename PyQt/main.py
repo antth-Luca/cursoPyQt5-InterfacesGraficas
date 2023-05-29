@@ -1,5 +1,5 @@
-from mod import *
+from PyQt.mod import *
 
-aplicação = QApplication(sys.argv)
+aplicacao = QApplication(sys.argv)
 j = Janela()
-sys.exit(aplicação.exec_())
+sys.exit(aplicacao.exec_())
