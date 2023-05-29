@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QToolTip, QLabel
-
+from PyQt5 import QtGui
 
 class Janela(QMainWindow, QPushButton):
     def __init__(self):
@@ -23,6 +23,8 @@ class Janela(QMainWindow, QPushButton):
         self.label1 = QLabel(self)
         self.config_label(self.label1, 'Olá, mundo! Clique em algum botão:')
 
+        self.label2 = QLabel(self)
+
         self.carregar_janela()
 
     def carregar_janela(self):
@@ -39,6 +41,12 @@ class Janela(QMainWindow, QPushButton):
         nome.setStyleSheet(f'QLabel {config}')
 
     @staticmethod
+    def config_imagem(nome_label, nome_imagem, esquerdal=50, topol=400, largural=450, altural=200):
+        nome_label.move(esquerdal, topol)
+        nome_label.setPixmap(QtGui.QPixmap(nome_imagem))
+        nome_label.resize(largural, altural)
+
+    @staticmethod
     def config_botao(nome, esquerdab=150, topob=150, largurab=150, alturab=80, cor='#ddeff0', fonte='bold', tamanho='20'):
         nome.move(esquerdab, topob)
         nome.resize(largurab, alturab)
@@ -46,7 +54,9 @@ class Janela(QMainWindow, QPushButton):
         nome.setStyleSheet(f'QPushButton {config}')
 
     def acao1(self):
-        self.config_label(self.label1, 'O botão 1 foi clicado!', '#3b747f')
+        self.config_label(self.label1, 'Olha o aviãozinho de Capimoney!', '#3b747f')
+        self.config_imagem(self.label2, 'Capimoney.jpg')
 
     def acao2(self):
-        self.config_label(self.label1, 'O botão 2 foi clicado!', '#e02222')
+        self.config_label(self.label1, 'Capi-capibara!', '#e02222')
+        self.config_imagem(self.label2, 'Capivara.jpg')
