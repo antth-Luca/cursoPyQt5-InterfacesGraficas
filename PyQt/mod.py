@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QToolTip
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QToolTip, QLabel
 
 
 class Janela(QMainWindow, QPushButton):
@@ -17,8 +17,11 @@ class Janela(QMainWindow, QPushButton):
         botao1.clicked.connect(self.acao1)
 
         botao2 = QPushButton('Botão2', self)
-        self.config_botao(botao2, 500, 150, 150, 80)
+        self.config_botao(botao2, 500, 150, 150, 80, '#ffc4c4')
         botao2.clicked.connect(self.acao2)
+
+        self.label1 = QLabel(self)
+        self.config_label(self.label1, 'Olá, mundo! Clique em algum botão:')
 
         self.carregar_janela()
 
@@ -28,16 +31,22 @@ class Janela(QMainWindow, QPushButton):
         self.show()
 
     @staticmethod
+    def config_label(nome, texto, cor='000000', fonte='bold', tamanho='25', esquerdal=50, topol=50, largural=460, altural=25):
+        nome.setText(texto)
+        nome.move(esquerdal, topol)
+        nome.resize(largural, altural)
+        config = '{' + ('font:{};font-size:{}px;color:{}'.format(fonte, tamanho, cor)) + '}'
+        nome.setStyleSheet(f'QLabel {config}')
+
+    @staticmethod
     def config_botao(nome, esquerdab=150, topob=150, largurab=150, alturab=80, cor='#ddeff0', fonte='bold', tamanho='20'):
         nome.move(esquerdab, topob)
         nome.resize(largurab, alturab)
         config = '{' + ('background-color:{};font:{};font-size:{}px'.format(cor, fonte, tamanho)) + '}'
         nome.setStyleSheet(f'QPushButton {config}')
 
-    @staticmethod
-    def acao1():
-        print('O botão 1 foi clicado!')
+    def acao1(self):
+        self.config_label(self.label1, 'O botão 1 foi clicado!', '#3b747f')
 
-    @staticmethod
-    def acao2():
-        print('O botão 2 foi clicado!')
+    def acao2(self):
+        self.config_label(self.label1, 'O botão 2 foi clicado!', '#e02222')
